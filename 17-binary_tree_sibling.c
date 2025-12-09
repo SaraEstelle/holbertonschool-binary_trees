@@ -4,7 +4,8 @@
  * binary_tree_sibling - function that checks if a binary tree is full
  * @node: pointer to the node to find the sibling
  *
- * Return: pointer to the sibling nodeIf node is NULL or the parent is NULL, return NULL
+ * Return: pointer to the sibling nodeIf node is NULL
+ * or the parent is NULL, return NULL
  * If node has no sibling, return NULL
  */
 binary_tree_t *binary_tree_sibling(binary_tree_t *node)

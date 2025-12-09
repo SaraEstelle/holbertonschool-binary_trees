@@ -7,6 +7,9 @@
  */
 int binary_tree_is_full(const binary_tree_t *tree)
 {
+	if (tree == NULL)
+		return (0);
+
 	/* Si pas d’enfants → ok */
 	if (!tree->left && !tree->right)
 		return (1);
