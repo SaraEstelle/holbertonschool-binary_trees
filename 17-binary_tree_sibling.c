@@ -2,30 +2,27 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_sibling - finds the sibling of a node
- * @node: pointer to the node to find the sibling
+ * binary_tree_sibling - trouve le frère d’un nœud
+ * @node: pointeur vers le nœud dont on cherche le frère
  *
- * Return: pointer to the sibling node
- * If node is NULL or parent is NULL → return NULL
- * If node has no sibling → return NULL
+ * Return: pointeur vers le frère du nœud
+ * Si node est NULL ou n'a pas de parent → retourne NULL
+ * Si le nœud n’a pas de frère → retourne NULL
  */
 binary_tree_t *binary_tree_sibling(binary_tree_t *node)
 {
-	// Si node est NULL ou si node n'a pas de parent
-	// → impossible d'avoir un frère
+	// Impossible d'avoir un frère si le nœud est NULL ou n'a pas de parent
 	if (node == NULL || node->parent == NULL)
 		return (NULL);
 
-	// Si node est l'enfant droit du parent
-	// → son frère est l'enfant gauche
+	// Si node est l'enfant droit → son frère est l'enfant gauche
 	if (node == node->parent->right)
 		return (node->parent->left);
 
-	// Si node est l'enfant gauche du parent
-	// → son frère est l'enfant droit
+	// Si node est l'enfant gauche → son frère est l'enfant droit
 	if (node == node->parent->left)
 		return (node->parent->right);
 
-	// Si aucun des cas ne correspond (peu probable), pas de frère
+	// Par sécurité : si aucun des cas n'est vrai → pas de frère
 	return (NULL);
 }

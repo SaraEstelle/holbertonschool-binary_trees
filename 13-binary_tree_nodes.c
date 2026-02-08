@@ -2,32 +2,26 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_nodes - counts the nodes with at least 1 child in a binary tree
- * @tree: pointer to the root node of the tree to count the number of nodes
+ * binary_tree_nodes - compte les nœuds ayant au moins un enfant
+ * @tree: pointeur vers la racine de l'arbre
  *
- * Return: If tree is NULL, the function must return 0
+ * Return: nombre de nœuds avec au moins un enfant, 0 si tree est NULL
  */
 size_t binary_tree_nodes(const binary_tree_t *tree)
 {
-	// Initialise un compteur pour le nombre de nœuds ayant au moins un enfant
 	size_t count = 0;
 
-	// Si l’arbre est NULL → aucun nœud à compter
+	/* Si l'arbre est NULL, il n'y a rien à compter */
 	if (tree == NULL)
 		return (0);
 
-	// Vérifie si le nœud courant possède au moins un enfant
+	/* Si le nœud a au moins un enfant, on l’inclut */
 	if (tree->left != NULL || tree->right != NULL)
 		count = 1;
 
-	// Ajoute récursivement le nombre de nœuds ayant au moins un enfant
-	// dans le sous-arbre gauche
+	/* Ajoute récursivement les nœuds de gauche et de droite */
 	count += binary_tree_nodes(tree->left);
-
-	// Ajoute récursivement le nombre de nœuds ayant au moins un enfant
-	// dans le sous-arbre droit
 	count += binary_tree_nodes(tree->right);
 
-	// Retourne le nombre total trouvé
 	return (count);
 }

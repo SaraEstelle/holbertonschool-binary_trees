@@ -2,66 +2,58 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_height_p - Measures the height of a binary tree
- * @tree: Pointer to the root node of the tree to measure the height
+ * binary_tree_height_p - mesure la hauteur d'un arbre binaire
+ * @tree: pointeur vers la racine de l'arbre
  *
- * Return: The height of the tree, or 0 if tree is NULL
+ * Return: hauteur de l'arbre, 0 si tree est NULL
  */
 size_t binary_tree_height_p(const binary_tree_t *tree)
 {
-	// Déclare la hauteur du sous-arbre gauche
-	size_t l = 0;
+	size_t l = 0, r = 0;
 
-	// Déclare la hauteur du sous-arbre droit
-	size_t r = 0;
-
-	// Si l’arbre est NULL → hauteur = 0
+	// Si l'arbre est vide → hauteur = 0
 	if (tree == NULL)
 		return (0);
 
-	// Si le nœud est une feuille (aucun enfant) → hauteur = 0
+	// Si le nœud est une feuille → hauteur = 0
 	if (tree->left == NULL && tree->right == NULL)
 		return (0);
 
-	// Calcule récursivement la hauteur du sous-arbre gauche
+	// Calcul récursif de la hauteur du sous-arbre gauche
 	l = binary_tree_height_p(tree->left);
 
-	// Calcule récursivement la hauteur du sous-arbre droit
+	// Calcul récursif de la hauteur du sous-arbre droit
 	r = binary_tree_height_p(tree->right);
 
-	// Retourne la hauteur la plus grande + 1 pour tenir compte du niveau actuel
+	// Retourne la hauteur la plus grande + 1 pour le niveau courant
 	return ((l > r ? l : r) + 1);
 }
 
 /**
- * binary_tree_is_perfect - checks if a binary tree is perfect
- * @tree: Pointer to the root node of the tree to check
+ * binary_tree_is_perfect - vérifie si un arbre binaire est parfait
+ * @tree: pointeur vers la racine de l'arbre
  *
- * Return: 0 if the tree is NULL or not perfect, 1 if perfect
+ * Return: 1 si parfait, 0 sinon ou si tree est NULL
  */
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
-	// Hauteur du sous-arbre gauche
-	size_t h_left = 0;
+	size_t h_left = 0, h_right = 0;
 
-	// Hauteur du sous-arbre droit
-	size_t h_right = 0;
-
-	// Si l’arbre est NULL → ce n’est pas un arbre parfait
+	// Si l'arbre est vide → pas parfait
 	if (tree == NULL)
 		return (0);
 
-	// Si c’est une feuille → un seul nœud est parfaitement équilibré
+	// Une feuille seule est considérée parfaite
 	if (tree->left == NULL && tree->right == NULL)
 		return (1);
 
-	// Calcule la hauteur du sous-arbre gauche
+	// Mesure la hauteur du sous-arbre gauche
 	h_left = binary_tree_height_p(tree->left);
 
-	// Calcule la hauteur du sous-arbre droit
+	// Mesure la hauteur du sous-arbre droit
 	h_right = binary_tree_height_p(tree->right);
 
-	// Si les hauteurs sont différentes → l’arbre n’est pas parfait
+	// Si les hauteurs diffèrent → arbre non parfait
 	if (h_left != h_right)
 		return (0);
 
@@ -69,6 +61,6 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 	if (binary_tree_is_perfect(tree->left) && binary_tree_is_perfect(tree->right))
 		return (1);
 
-	// Si un des deux sous-arbres n'est pas parfait → résultat final = 0
+	// Si une des conditions échoue → arbre non parfait
 	return (0);
 }

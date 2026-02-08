@@ -1,41 +1,44 @@
 #include "binary_trees.h"
 
 /**
- * binary_trees_ancestor - trouve l'ancêtre commun le plus bas
- * @first: premier node
- * @second: deuxième node
+ * binary_trees_ancestor - trouve l'ancêtre commun le plus bas (lowest common ancestor)
+ * @first: premier nœud
+ * @second: deuxième nœud
  *
- * Return: pointeur vers l'ancêtre commun, sinon NULL
+ * Return: pointeur vers l'ancêtre commun le plus bas, sinon NULL
  */
 binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 				     const binary_tree_t *second)
 {
 	const binary_tree_t *f, *s;
 
+	// Si un des nœuds est NULL → impossible de trouver un ancêtre
 	if (!first || !second)
 		return (NULL);
 
-	/* on va boucler tant qu'il reste quelque chose à explorer */
+	// On commence à explorer les chemins depuis chaque nœud
 	f = first;
 	s = second;
 
 	while (f || s)
 	{
-		/* comparer tout le chemin de f avec second */
+		// On remonte depuis f et on compare avec tous les ancêtres de second
 		if (f)
 		{
 			const binary_tree_t *temp = second;
 
 			while (temp)
 			{
+				// Si on trouve un ancêtre commun → c’est le LCA
 				if (temp == f)
 					return ((binary_tree_t *)f);
 				temp = temp->parent;
 			}
+			// On remonte d’un niveau depuis f
 			f = f->parent;
 		}
 
-		/* comparer tout le chemin de s avec first */
+		// On remonte depuis s et on compare avec tous les ancêtres de first
 		if (s)
 		{
 			const binary_tree_t *temp = first;
@@ -46,9 +49,11 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 					return ((binary_tree_t *)s);
 				temp = temp->parent;
 			}
+			// On remonte d’un niveau depuis s
 			s = s->parent;
 		}
 	}
 
+	// Aucun ancêtre commun trouvé
 	return (NULL);
 }

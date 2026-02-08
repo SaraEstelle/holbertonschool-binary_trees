@@ -1,25 +1,17 @@
-// Inclusion du fichier d'en-tête contenant les structures et prototypes liés aux arbres binaires
 #include "binary_trees.h"
 
 /**
- * binary_tree_delete - deletes an entire binary tree
- * @tree: pointer to the root node of the tree to delete
+ * binary_tree_delete - supprime un arbre binaire entier
+ * @tree: pointeur vers la racine de l'arbre à supprimer
  *
- * Return: if tree is NULL, do nothing
+ * Return: rien
  */
-
 void binary_tree_delete(binary_tree_t *tree)
 {
-	// Si l'arbre est vide, on ne fait rien
-	if (tree == NULL)
+	if (tree == NULL) /* si l'arbre est vide */
 		return;
 
-	// Suppression récursive du sous-arbre gauche
-	binary_tree_delete(tree->left);
-
-	// Suppression récursive du sous-arbre droit
-	binary_tree_delete(tree->right);
-
-	// Libération du nœud courant après avoir supprimé ses enfants
-	free(tree);
+	binary_tree_delete(tree->left);  /* supprimer le sous-arbre gauche */
+	binary_tree_delete(tree->right); /* supprimer le sous-arbre droit */
+	free(tree);                      /* libérer le noeud courant */
 }

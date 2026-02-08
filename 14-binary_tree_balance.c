@@ -2,57 +2,41 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_height_b - Measures the height of a binary tree for balance
- * @tree: Pointer to the root node of the tree to measure the height
+ * binary_tree_height_b - mesure la hauteur d'un arbre pour le calcul du balance
+ * @tree: pointeur vers la racine de l'arbre
  *
- * Return: The height of the tree (1-based), or 0 if tree is NULL
+ * Return: hauteur de l'arbre (1-based), 0 si tree est NULL
  */
 size_t binary_tree_height_b(const binary_tree_t *tree)
 {
-	// Hauteur du sous-arbre gauche
-	size_t l = 0;
+	size_t l = 0; /* hauteur sous-arbre gauche */
+	size_t r = 0; /* hauteur sous-arbre droit */
 
-	// Hauteur du sous-arbre droit
-	size_t r = 0;
-
-	// Si le nœud est NULL → hauteur = 0
 	if (tree == NULL)
 		return (0);
 
-	// Calcule récursivement la hauteur du sous-arbre gauche
-	l = binary_tree_height_b(tree->left);
+	l = binary_tree_height_b(tree->left);   /* hauteur gauche */
+	r = binary_tree_height_b(tree->right);  /* hauteur droite */
 
-	// Calcule récursivement la hauteur du sous-arbre droit
-	r = binary_tree_height_b(tree->right);
-
-	// Retourne la hauteur maximale entre gauche et droite + 1 (niveau actuel)
-	return ((l > r ? l : r) + 1);
+	return ((l > r ? l : r) + 1);           /* max + 1 pour le niveau actuel */
 }
 
 /**
- * binary_tree_balance - Measures the balance factor of a binary tree
- * @tree: Pointer to the root node of the tree to measure the balance factor
+ * binary_tree_balance - calcule le facteur d'équilibre d'un arbre binaire
+ * @tree: pointeur vers la racine de l'arbre
  *
- * Return: The balance factor, or 0 if tree is NULL
+ * Return: balance factor (gauche - droite), 0 si tree est NULL
  */
 int binary_tree_balance(const binary_tree_t *tree)
 {
-	// Hauteur du sous-arbre gauche
-	int left_h = 0;
+	int left_h = 0;  /* hauteur sous-arbre gauche */
+	int right_h = 0; /* hauteur sous-arbre droit */
 
-	// Hauteur du sous-arbre droit
-	int right_h = 0;
-
-	// Si l’arbre est NULL → facteur d’équilibre = 0
 	if (tree == NULL)
 		return (0);
 
-	// Mesure la hauteur du sous-arbre gauche
-	left_h = (int)binary_tree_height_b(tree->left);
+	left_h = (int)binary_tree_height_b(tree->left);   /* hauteur gauche */
+	right_h = (int)binary_tree_height_b(tree->right); /* hauteur droite */
 
-	// Mesure la hauteur du sous-arbre droit
-	right_h = (int)binary_tree_height_b(tree->right);
-
-	// Le facteur d’équilibre = hauteur gauche - hauteur droite
-	return (left_h - right_h);
+	return (left_h - right_h); /* balance = gauche - droite */
 }
